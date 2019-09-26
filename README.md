@@ -61,7 +61,38 @@ Build the source code. (Please make sure you are in the root folder)
 ./gradlew build
 ```
 
-Once you completed the built process, you can access the service via console.
+Once you completed the built process, you can access the jar file inside ./build/libs/*.jar.
+
+## Running the application
+
+Step 1
+
+Change the working directory via terminal (Please make sure you are in the root folder)
+
+```
+cd ./build/libs
+```
+
+Step 2
+
+Download, extract and copy json-simple-1.1.jar into the build/libs folder
+
+```
+http://www.java2s.com/Code/JarDownload/json-simple/json-simple-1.1.jar.zip
+```
+
+Step 3
+
+Copy users.json/tickets.json/organizations.json files to build/libs folder
+
+
+Step 4
+
+Run the application on terminal (Please make sure you are in the libs folder)
+
+```
+java -cp swivel-code-challenge.jar:json-simple-1.1.jar com.swivel.codechallenge.Application
+```
 
 ## Running the tests
 
