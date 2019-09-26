@@ -2,6 +2,22 @@
 
 This project includes the swivel code challenge source files.
 
+## Functional and Non Functional Requirements
+
+```
+1. Extensibility - separation of concerns.
+2. Simplicity - aim for the simplest solution that gets the job done
+whilst remaining readable, extensible and testable.
+3. Test Coverage - breaking changes should break your tests. We prefer
+Unit Test without testing the json file, please mock them.
+4. Performance - should gracefully handle a significant increase in
+amount of data provided (e.g 10000+ users).
+5. Robustness - should handle and report errors. If you have any
+questions about this criterion please ask.
+6. Use of appropriate design patterns and data structures
+7. Proper exception handling
+```
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
