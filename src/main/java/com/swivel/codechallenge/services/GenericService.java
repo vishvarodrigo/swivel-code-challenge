@@ -51,7 +51,7 @@ public class GenericService {
 	public void displayEmptyLine() {
 		System.out.println();
 	}
-	
+
 	public void displayLine() {
 		System.out.println("---------------------------------------------------------");
 	}
@@ -70,7 +70,7 @@ public class GenericService {
 		JSONObject jsonObject = searchObjectByKeyAndValue(searchTerm, searchValue, source);
 		if (jsonObject == null) {
 			System.out.println(Util.NO_RESULT_FOUND_TEXT);
-			return null;
+			return new JSONObject();
 		}
 		return jsonObject;
 	}
@@ -78,8 +78,7 @@ public class GenericService {
 	// Read data from the file based on the source
 	public JSONArray readDataFromFile(Source source) {
 		JSONParser jsonParser = new JSONParser();
-		try (FileReader fileReader = new FileReader(
-				getClass().getClassLoader().getResource(source.getFileName()).getFile())) {
+		try (FileReader fileReader = new FileReader("./".concat(source.getFileName()))) {
 			JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
 			return jsonArray;
 		} catch (Exception ex) {
@@ -90,11 +89,15 @@ public class GenericService {
 
 	private JSONObject searchObjectByKeyAndValue(String key, String value, Source source) {
 		JSONArray jsonArray = readDataFromFile(source);
-		for (int i = 0; i < jsonArray.size(); i++) {
-			JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-			if (jsonObject.get(key).equals((value.matches("\\d+") ? Long.parseLong(value) : value))) {
-				return jsonObject;
+		try {
+			for (int i = 0; i < jsonArray.size(); i++) {
+				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+				if (jsonObject.get(key).equals((value.matches("\\d+") ? Long.parseLong(value) : value))) {
+					return jsonObject;
+				}
 			}
+		} catch (Exception ex) {
+			System.out.println(Util.INVALID_INPUT_TEXT);
 		}
 		return null;
 	}
@@ -110,5 +113,12 @@ public class GenericService {
 		});
 		displayEmptyLine();
 		displayLine();
+	}
+
+	@SuppressWarnings("unchecked")
+	public void displayJsonObject(JSONObject jsonObject) {
+		jsonObject.forEach((k, v) -> {
+			System.out.printf("%-20s %-20s%n", k, v);
+		});
 	}
 }
