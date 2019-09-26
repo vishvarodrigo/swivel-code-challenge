@@ -58,7 +58,7 @@ Step 3
 Build the source code. (Please make sure you are in the root folder)
 
 ```
-./gradlew build
+./gradlew build -x test
 ```
 
 Once you completed the built process, you can access the jar file inside ./build/libs/*.jar.
