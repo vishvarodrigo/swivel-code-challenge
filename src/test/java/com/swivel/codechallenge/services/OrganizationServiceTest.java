@@ -11,6 +11,7 @@ public class OrganizationServiceTest {
 		this.organizationService = OrganizationService.origanizationService();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void appendOrganizationNameTest() {
 		JSONObject jsonObject = new JSONObject();

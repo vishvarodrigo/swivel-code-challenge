@@ -30,42 +30,36 @@ public class Application {
 			System.out.println(Util.INVALID_INPUT_TEXT + ex.getMessage());
 		}
 	}
-	
+
 	private void displayHeaders() {
 		genericService.displayTitle(Util.MAIN_HEADER_TEXT);
 		genericService.displayTitle(Util.OPTIONS_TEXT);
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	private void initiateSearchOption(int input) {
 		JSONObject jsonObject = null;
-		
-		if(input==Source.USERS.getValue()) {
+
+		if (input == Source.USERS.getValue()) {
 			jsonObject = genericService.initiate(Source.USERS);
 			ticketService.appendAssigneeTicketSubjectAndSubmittedTicketSubject(jsonObject);
 			organizationService.appendOrganizationName(jsonObject);
-		}
-		else if(input==Source.TICKETS.getValue()) {
+		} else if (input == Source.TICKETS.getValue()) {
 			jsonObject = genericService.initiate(Source.TICKETS);
 			userService.appendAssigneeNameAndSubmitterName(jsonObject);
 			organizationService.appendOrganizationName(jsonObject);
-		}
-		else if(input==Source.ORGANIZATIONS.getValue()) {
+		} else if (input == Source.ORGANIZATIONS.getValue()) {
 			jsonObject = genericService.initiate(Source.ORGANIZATIONS);
 			ticketService.appendTicketSubject(jsonObject);
 			userService.appendUsername(jsonObject);
-		}else {
-			System.out.println(Util.INVALID_INPUT_TEXT);
+		} else {
+			genericService.displayTitle(Util.INVALID_INPUT_TEXT);
 		}
-		
-		jsonObject.forEach((k, v) -> {
-			System.out.printf("%-20s %-20s%n", k, v);
-		});
-		
+
+		genericService.displayJsonObject(jsonObject);
 		genericService.displayEmptyLine();
 	}
-	
-	public void run(){
+
+	public void run() {
 		while (true) {
 			displayHeaders();
 			switch (genericService.getInputString()) {
@@ -86,5 +80,5 @@ public class Application {
 			}
 		}
 	}
-	
+
 }
